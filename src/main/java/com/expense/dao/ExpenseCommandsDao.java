@@ -23,7 +23,6 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 		this.con = con;
 	}
 	
-	/////TODO: need to grab info from the reimbursements table using lookup tables
 	
 	/////This is called when a buyer makes a new purchase order
 	@Override
@@ -38,7 +37,6 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 			cStat.setInt(5, 1);
 			cStat.setInt(6, entity.getTypeId());
 			cStat.execute();
-			
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -123,17 +121,15 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 	
 	/////This grabs all requests with a particular status code: "pending," for example
 	@Override
-	public List<ExpenseRequest> getAllExpAdmin(int num) {
+	public List<ExpenseRequest> getAllExpAdmin() {
 		List<ExpenseRequest> reqList = new ArrayList<>();
 		try(Connection connect = con.getDbConnection()) {
 			String sql = "select er.reimb_id, er.reimb_amount, er.reimb_submitted, er.reimb_resolved, er.reimb_description,"
 					+ "er.reimb_author, er.reimb_resolver, er.reimb_status_id, er.reimb_type_id, es.reimb_status,"
 					+ "et.reimb_type from ers_reimbursement as er" + " "
 					+ "left join ers_reimbursement_status as es on er.reimb_status_id = es.reimb_status_id" + " "
-					+ "left join ers_reimbursement_type as et on er.reimb_type_id = et.reimb_type_id" + " "
-					+ "where er.reimb_status_id = ?";
+					+ "left join ers_reimbursement_type as et on er.reimb_type_id = et.reimb_type_id";
 			PreparedStatement pStat = connect.prepareStatement(sql);
-			pStat.setInt(1, num);
 			ResultSet results = pStat.executeQuery();
 			
 			while(results.next()) {
@@ -161,16 +157,19 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 	
 	/////This is to approve or deny a request
 	@Override
-	public void updateExpense(ExpenseRequest entity, int managerId, int statusId) {
+	public void updateExpense(int reqNum, int managerId, int statusId) {
 		try(Connection connect = con.getDbConnection()) {
-			String sql = "update ers_reimbursement set reimb_status_id = ?, reimb_resolver = ?, reimb_resolved = ? "
-					+ "where reimb_id = ?";
-			PreparedStatement pStat = connect.prepareStatement(sql);
-			pStat.setInt(1, statusId);
-			pStat.setInt(2, managerId);
-			pStat.setString(3, entity.getResolvedDate());
-			pStat.setInt(4, entity.getId());
-			pStat.executeQuery();
+			String sql1 = "update ers_reimbursement set reimb_resolver = ?, reimb_status_id = ? where reimb_id = ?;";
+			PreparedStatement pStat1 = connect.prepareStatement(sql1);
+			pStat1.setInt(1, managerId);
+			pStat1.setInt(2, statusId);
+			pStat1.setInt(3, reqNum);
+			pStat1.executeQuery();
+			
+			String sql2 = "update ers_reimbursement set reimb_resolved = cast(current_timestamp as timestamp) where reimb_id = ?";
+			PreparedStatement pStat2 = connect.prepareStatement(sql2);
+			pStat2.setInt(1, reqNum);
+			pStat2.executeQuery();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

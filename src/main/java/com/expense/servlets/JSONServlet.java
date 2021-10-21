@@ -14,6 +14,7 @@ public class JSONServlet extends HttpServlet{
 
 		  @Override
 		  protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+			  System.out.println("in JSON Servlet, doGet");
 			  JSONDispatcher.process(req, res);
 		  }
 	

@@ -7,8 +7,8 @@ public interface GenExpenseDao<T> {
 	void addExpense(T entity);
 	T getExpense(int num);
 	List<T> getAllExpenses(int num);
-	List<T> getAllExpAdmin(int num);
-	void updateExpense(T entity, int num1, int num2);
+	List<T> getAllExpAdmin();
+	void updateExpense(int num1, int num2, int num3);
 	void delete(T entity);
 	
 }

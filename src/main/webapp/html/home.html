@@ -5,11 +5,29 @@
 <title>Imperial Purchasing System</title>
 </head>
 <body>
+	<header>
+		<h1>Welcome to the Imperial Planet Purchasing Service</h1>
+	</header>
 	<h1>Logged in successfully</h1>
 	<p id = "login-header"></p>
 	<div id = "my-requests"></div>
 	<div class = "action-buttons">
 		<button></button>
+	</div>
+	
+	<div class = "formContainer">
+		<form method = "post" action = "/Project_1/JSONServlet/newReq.json">
+			<label for = "reqTypeId">What type of object?></label>
+				<select name = "reqTypeId">
+					<option value = 1>Planet</option>
+					<option value = 2>Moon</option>
+					<option value = 3>Asteroid</option>
+					<option value = 4>Other</option>
+				</select>
+			<input type = "text" name = "description" placeholder = "Enter name of planet you want to buy" />
+			<input type = "text" name = "amount" placeholder = "Enter amount" />
+			
+		</form>
 	</div>
 	
 <script src = "../js/script.js"></script>

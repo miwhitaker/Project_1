@@ -14,7 +14,8 @@ public class ExpenseRequest {
 	private String statusName;
 	private String typeName;
 	
-	
+	///there are a ton of contructors here. While I was coding, I realized I didn't have the correct constructor to create 
+	///the objects I needed, so I would just add a new constructor
 	public ExpenseRequest() {}
 	public ExpenseRequest(	
 			int id, 
