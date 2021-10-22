@@ -2,11 +2,8 @@ package com.expense.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.expense.dao.ExpenseCommandsDao;
 import com.expense.dao.ExpenseDbConnection;
 import com.expense.dao.UserCommandsDao;
@@ -33,7 +30,7 @@ public class ExpenseController {
 		UserAccount user = service.checkCredentials(req.getParameter("username"), req.getParameter("password"));
 		
 		if(user == null) {
-			return "/html/unsuccesful.html";
+			return "/html/unsucessful.html";
 		}
 		else if(user.getRoleId() == 2){
 			//creates session for user with a key of "currentUser" and value of the user object
@@ -74,7 +71,7 @@ public class ExpenseController {
 		res.getWriter().write(new ObjectMapper().writeValueAsString(userRequests));
 	}
 	
-	public static void newReq(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+	public static String newReq(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
 		System.out.println("Inside the newReq method");
 		UserAccount currUser = (UserAccount)req.getSession().getAttribute("currentUser");
 		int userId = currUser.getUsersId();
@@ -84,12 +81,16 @@ public class ExpenseController {
 		int type = Integer.parseInt(typeStr);
 		ExpenseRequest newReq = new ExpenseRequest(amount, req.getParameter("description"), userId, type);
 		eServ.addNewRequest(newReq);
+		
+		return "/html/home.html";
 	}
 	
-	public static void adminAll(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
+	public static String adminAll(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {
 		System.out.println("inside the adminAll method");
 		List<ExpenseRequest> userRequests = eServ.getAllExpAdmin();
 		res.getWriter().write(new ObjectMapper().writeValueAsString(userRequests));
+
+		return "/html/homeadmin.html";
 	}
 	
 	public static void adminApprove(HttpServletRequest req, HttpServletResponse res) throws JsonProcessingException, IOException {

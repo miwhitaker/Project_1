@@ -32,7 +32,7 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 			CallableStatement cStat = connect.prepareCall(sql);
 			cStat.registerOutParameter(1, Types.VARCHAR);
 			cStat.setInt(2, entity.getAmount());
-			cStat.setString(3, entity.getDesription());
+			cStat.setString(3, entity.getDescription());
 			cStat.setInt(4, entity.getAuthor());
 			cStat.setInt(5, 1);
 			cStat.setInt(6, entity.getTypeId());
@@ -65,7 +65,7 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 				currRequest.setAmount(results.getInt(2));
 				currRequest.setSubmittedDate(results.getString(3));
 				currRequest.setResolvedDate(results.getString(4));
-				currRequest.setDesription(results.getString(5));
+				currRequest.setDescription(results.getString(5));
 				currRequest.setAuthor(results.getInt(6));
 				currRequest.setResolver(results.getInt(7));
 				currRequest.setStatusId(results.getInt(8));
@@ -102,7 +102,7 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 				currRequest.setAmount(results.getInt(2));
 				currRequest.setSubmittedDate(results.getString(3));
 				currRequest.setResolvedDate(results.getString(4));
-				currRequest.setDesription(results.getString(5));
+				currRequest.setDescription(results.getString(5));
 				currRequest.setAuthor(results.getInt(6));
 				currRequest.setResolver(results.getInt(7));
 				currRequest.setStatusId(results.getInt(8));
@@ -128,7 +128,9 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 					+ "er.reimb_author, er.reimb_resolver, er.reimb_status_id, er.reimb_type_id, es.reimb_status,"
 					+ "et.reimb_type from ers_reimbursement as er" + " "
 					+ "left join ers_reimbursement_status as es on er.reimb_status_id = es.reimb_status_id" + " "
-					+ "left join ers_reimbursement_type as et on er.reimb_type_id = et.reimb_type_id";
+					+ "left join ers_reimbursement_type as et on er.reimb_type_id = et.reimb_type_id" + " "
+					+ "where er.reimb_status_id = 1";
+					
 			PreparedStatement pStat = connect.prepareStatement(sql);
 			ResultSet results = pStat.executeQuery();
 			
@@ -138,7 +140,7 @@ public class ExpenseCommandsDao implements GenExpenseDao<ExpenseRequest> {
 				currRequest.setAmount(results.getInt(2));
 				currRequest.setSubmittedDate(results.getString(3));
 				currRequest.setResolvedDate(results.getString(4));
-				currRequest.setDesription(results.getString(5));
+				currRequest.setDescription(results.getString(5));
 				currRequest.setAuthor(results.getInt(6));
 				currRequest.setResolver(results.getInt(7));
 				currRequest.setStatusId(results.getInt(8));

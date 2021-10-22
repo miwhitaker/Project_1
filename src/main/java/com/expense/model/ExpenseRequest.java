@@ -6,7 +6,7 @@ public class ExpenseRequest {
 	private int amount;
 	private String submittedDate;
 	private String resolvedDate;
-	private String desription;
+	private String description;
 	private int author;
 	private int resolver;
 	private int statusId;
@@ -22,7 +22,7 @@ public class ExpenseRequest {
 			int amount,
 			String submittedDate,
 			String resolvedDate,
-			String desription,
+			String description,
 			int author,
 			int resolver,
 			int statusId,
@@ -33,7 +33,7 @@ public class ExpenseRequest {
 		this.amount = amount;
 		this.submittedDate = submittedDate;
 		this.resolvedDate = resolvedDate;
-		this.desription = desription;
+		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -45,7 +45,7 @@ public class ExpenseRequest {
 			int amount,
 			String submittedDate,
 			String resolvedDate,
-			String desription,
+			String description,
 			int author,
 			int resolver,
 			int statusId,
@@ -54,7 +54,7 @@ public class ExpenseRequest {
 		this.amount = amount;
 		this.submittedDate = submittedDate;
 		this.resolvedDate = resolvedDate;
-		this.desription = desription;
+		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -63,12 +63,12 @@ public class ExpenseRequest {
 	
 	public ExpenseRequest(	
 			int amount,
-			String desription,
+			String description,
 			int author,
 			int typeId) 
 	{
 		this.amount = amount;
-		this.desription = desription;
+		this.description = description;
 		this.author = author;
 		this.typeId = typeId;	
 	}
@@ -78,7 +78,7 @@ public class ExpenseRequest {
 			int amount,
 			String submittedDate,
 			String resolvedDate,
-			String desription,
+			String description,
 			int author,
 			int resolver,
 			int statusId,
@@ -91,7 +91,7 @@ public class ExpenseRequest {
 		this.amount = amount;
 		this.submittedDate = submittedDate;
 		this.resolvedDate = resolvedDate;
-		this.desription = desription;
+		this.description = description;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -124,11 +124,11 @@ public class ExpenseRequest {
 	public void setResolvedDate(String resolvedDate) {
 		this.resolvedDate = resolvedDate;
 	}
-	public String getDesription() {
-		return desription;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesription(String desription) {
-		this.desription = desription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public int getAuthor() {
 		return author;
@@ -169,7 +169,7 @@ public class ExpenseRequest {
 	@Override
 	public String toString() {
 		return "ExpenseRequest [id=" + id + ", amount=" + amount + ", submittedDate=" + submittedDate
-				+ ", resolvedDate=" + resolvedDate + ", desription=" + desription + ", author=" + author + ", resolver="
+				+ ", resolvedDate=" + resolvedDate + ", description=" + description + ", author=" + author + ", resolver="
 				+ resolver + ", statusId=" + statusId + ", typeId=" + typeId + ", statusName=" + statusName
 				+ ", typeName=" + typeName + "]";
 	}

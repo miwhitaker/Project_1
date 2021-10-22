@@ -25,12 +25,20 @@ public class JSONDispatcher {
 		 		ExpenseController.getExpenseRequests(req, res);
 		 		break;
 		 		
-		 	case "/Project_1/JSONServlet/newrequest.json":
+		 	case "/Project_1/JSONServlet/newreq.json":
+		 		System.out.println("inside JSON dispatcher - new requests");
 		 		ExpenseController.newReq(req, res);
 		 		break;
 		 		
-		 	case "/Project_1/JSONServlet/adminrequest.json":
+		 	case "/Project_1/JSONServlet/getadmin.json":
+		 		System.out.println("inside JSON dispatcher - admin requests");
 		 		ExpenseController.adminAll(req, res);
+		 		break;
+		 	
+		 	case "/Project_1/JSONServlet/changestatus.json":
+		 		System.out.println("inside JSON dispatcher - change status");
+		 		ExpenseController.adminApprove(req, res);
+		 		break;
 			 
 		default:
 			res.getWriter().write(new ObjectMapper().writeValueAsString(new UserAccount()));

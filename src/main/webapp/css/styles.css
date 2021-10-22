@@ -1,17 +1,94 @@
 @charset "ISO-8859-1";
 
+html {
+	background-color: lightgray;
+}
+
 header {
 	width: 100%;
 	height: 80px;
 	background-color: black;
-	color: goldenrod;
+	color: yellow;
 	border: 2px solid white;
 	padding-top: 5px;
 	margin: auto auto;
+	display: flex;
+    justify-content: space-around;
+}
+
+body {
+	background-color: lightgray;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .form-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: auto auto;
+	width: 16%
+}
+
+.new-req-container {
+	margin-top: 20px;
+	align-items: center;
+	margin: auto auto;
+}
+
+.login-message {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.user-box, .pass-box, .login-btn {
+	box-shadow: 4px 4px 2px rgb(63, 25, 25);
+}
+
+.logout {
+	float: right;
+}
+
+.registration-heading {
+	text-align: center;
+    margin-top: 60px;
+}
+
+.pass-box, .login-btn {
+	margin-top: 6px;
+}
+
+.login-btn {
+	text-align: right;
+	margin-left: 62px;
+}
+
+.expTable {
+	width: 90%;
+	text-align: center;
+	margin-left: 15px;
+}
+
+.table-container {
+	margin-top: 30px;
+}
+
+.table, td, tr {
+	border: 2px solid blue;
+}
+
+#newPurchase {
+	width: 50%;
+	text-align: center;
+	display: flex;
+	justify-content: space-around;
+}
+
+.reg-form-container {
+	text-align: center;
 }

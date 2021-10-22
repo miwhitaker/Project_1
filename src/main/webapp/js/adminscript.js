@@ -1,9 +1,7 @@
 /**
- * Javascript file for index.html page
+ * 
  */
-console.log("JS is connected")
 
-let visible = false;
 
 function mapResponse(request) {
 	let tableBody = document.getElementById("tbody")
@@ -43,10 +41,11 @@ function mapResponse(request) {
 
 function getRequests() {
 	let xhttp =  new XMLHttpRequest();
-	let url = '/Project_1/JSONServlet/requests.json'
+	let url = '/Project_1/JSONServlet/getadmin.json'
 	xhttp.onreadystatechange = function(){
 		if(xhttp.readyState==4 && xhttp.status==200){
 			let response = JSON.parse(xhttp.responseText);
+			console.log(response);
 			mapResponse(response)
 		}
 	}
@@ -54,12 +53,10 @@ function getRequests() {
 	xhttp.send();
 }
 
-
-//This function was written with heavy use of Stack Overflow
-async function getNewRequests() {
-	var params = `type=${document.querySelector('#type').value}&description=${document.querySelector('#desc').value}&amount=${document.querySelector('#amt').value}`;
+async function approveRequests() {
+	var params = `statusChange=${document.querySelector('#status').value}&requestId=${document.querySelector('#reqId').value}`;
 	(async () => {
-  		const rawResponse = await fetch('/Project_1/JSONServlet/newreq.json', {
+  		const rawResponse = await fetch('/Project_1/JSONServlet/changestatus.json', {
     		method: 'POST',
    			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 	    	body: params
@@ -75,8 +72,7 @@ async function getNewRequests() {
 
 function clearHtml() {
 	document.getElementById('tbody').innerHTML = '';
-	document.getElementById('amt').value = '';
-	document.getElementById('desc').value = '';
+	document.getElementById("reqId").value = '';
 }
 
 getRequests();
